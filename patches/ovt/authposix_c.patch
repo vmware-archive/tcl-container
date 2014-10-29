@@ -1,0 +1,37 @@
+--- lib/auth/authPosix.c.orig	2014-08-26 15:18:45.326922667 -0700
++++ lib/auth/authPosix.c	2014-08-26 15:38:11.794894002 -0700
+@@ -20,6 +20,7 @@
+ #include <stdio.h>
+ #include <string.h>
+ #include <unistd.h> // for access, crypt, etc.
++#include <shadow.h>
+ 
+ #include "vmware.h"
+ #include "vm_version.h"
+@@ -341,10 +342,23 @@
+    }
+ 
+    if (*pwd->pw_passwd != '\0') {
+-      char *namep = (char *) crypt(pass, pwd->pw_passwd);
++      const char *pw = pwd->pw_passwd;
++      const char *namep;
+ 
+-      if (strcmp(namep, pwd->pw_passwd) != 0) {
+-         // Incorrect password
++      if(strcmp(pwd->pw_passwd, "x") == 0) {
++         struct spwd *sp = getspnam(user);
++         if (sp) {
++            pw = sp->sp_pwdp;
++         }
++      }
++
++      namep = (char *) crypt(pass, pw);
++      if (namep) {
++         if (strcmp(namep, pw) != 0) {
++            // Incorrect password
++            return NULL;
++         }
++      } else {
+          return NULL;
+       }
+ 

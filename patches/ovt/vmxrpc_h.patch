@@ -1,0 +1,13 @@
+--- lib/include/vmxrpc.h.orig	2014-10-07 23:44:40.455942159 +0000
++++ lib/include/vmxrpc.h	2014-10-06 23:32:31.897055529 +0000
+@@ -36,9 +36,9 @@
+  * translate the names to the more common ones.
+  */
+ #if defined(__GLIBC__) || defined(sun)
+-#  define xdr_u_int16_t(x, i)    xdr_uint16_t(x, i)
+-#  define xdr_u_int32_t(x, i)    xdr_uint32_t(x, i)
+-#  define xdr_u_int64_t(x, i)    xdr_uint64_t(x, i)
++//#  define xdr_u_int16_t(x, i)    xdr_uint16_t(x, i)
++//#  define xdr_u_int32_t(x, i)    xdr_uint32_t(x, i)
++//#  define xdr_u_int64_t(x, i)    xdr_uint64_t(x, i)
+ #endif
