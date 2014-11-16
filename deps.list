@@ -42,4 +42,13 @@ glib2.tcz
 libffi-dev.tcz
 perl5.tcz
 
+autoconf.tcz
+autogen.tcz
+automake.tcz
+libtool.tcz
+gc.tcz
+guile.tcz
+libltdl.tcz
+libtool-dev.tcz
+libunistring.tcz
 
