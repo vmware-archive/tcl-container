@@ -2,7 +2,7 @@ FROM tinycorelinux
 
 COPY deps.list /root/
 
-ENV TCL_REPO_BASE   http://tinycorelinux.net/5.x/x86
+ENV TCL_REPO_BASE   http://tinycorelinux.net/6.x/x86_64
 
 # Install the TCZ dependencies
 RUN cd /tmp && for dep in $(cat /root/deps.list); do \

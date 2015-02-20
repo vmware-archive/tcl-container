@@ -22,7 +22,7 @@ mkdir /tmp/stage
 cd /root
 tar zxf ${LIBDNET}.tar.gz 
 cd ${LIBDNET}
-./configure --host=i486-pc-linux-gnu && make && make install && make DESTDIR=/tmp/stage/libdnet install
+./configure && make && make install && make DESTDIR=/tmp/stage/libdnet install
 
 (cd /tmp/stage/libdnet && tar zcf /tarballs/libdnet.tgz .)
 
@@ -37,7 +37,7 @@ done
 # we need to set --host because boot2docker is 32 bit, and this will not be
 # detected correctly in a container running in a 64bit host
 autoreconf -i && \
-./configure --without-kernel-modules --without-pam --without-x --without-icu --host=i486-pc-linux-gnu && \
+./configure --without-kernel-modules --without-pam --without-x --without-icu && \
   make LIBS="-ltirpc" CFLAGS='-Wno-deprecated-declarations' && \
   make DESTDIR=/tmp/stage/open-vm-tools install
 
