@@ -34,10 +34,8 @@ for f in /root/patches/ovt/*.patch ; do
    patch -p0 < $f
 done
 
-# we need to set --host because boot2docker is 32 bit, and this will not be
-# detected correctly in a container running in a 64bit host
 autoreconf -i && \
-./configure --without-kernel-modules --without-pam --without-x --without-icu && \
+./configure --without-kernel-modules --without-pam --without-x --without-icu --without-procps && \
   make LIBS="-ltirpc" CFLAGS='-Wno-deprecated-declarations' && \
   make DESTDIR=/tmp/stage/open-vm-tools install
 

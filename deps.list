@@ -22,6 +22,8 @@ glibc_base-dev.tcz
 gmp.tcz
 grep.tcz
 guile.tcz
+isl.tcz
+isl_dev.tcz
 libffi-dev.tcz
 libffi.tcz
 libltdl.tcz
@@ -37,10 +39,14 @@ mpc.tcz
 mpfr.tcz
 ncurses.tcz
 patch.tcz
+pcre-dev.tcz
+pcre.tcz
 perl5.tcz
 pkg-config.tcz
 ppl.tcz
 procps.tcz
+readline-dev.tcz
+readline.tcz
 sed.tcz
 util-linux_base-dev.tcz
 zlib_base-dev.tcz
