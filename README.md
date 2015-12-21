@@ -1,20 +1,35 @@
 tcl-container
 =============
 
-Create a tinycorelinux container to build apps for it - useful for boot2docker
+Create a [tinycorelinux](http://tinycorelinux.net/) container to build services 
+and tools for it - useful for boot2docker / docker-machine.
 
-To create a tinycorelinux docker image, call the script mktcl.sh:
-./mktcl.sh
+To create a tinycorelinux docker image, use the script `mktcl.sh`:
 
-Then build a development container out of using the Dockerfile:
+```console
+$ ./mktcl.sh
+```
 
-sudo docker build .
+It's also useful to build a development container based on this using the 
+provided Dockerfile.
 
-This can then be used to build open-vm-tools and libdnet, using the file build.sh:
+```console
+$ docker build -t tinycorelinux:development .
+```
 
-sudo docker tag 53a89975885d tinycorelinux:ovt-devel
+Now you can use this container image to build 
+[`open-vm-tools`](https://github.com/vmware/open-vm-tools) and 
+[`libdnet`](http://libdnet.sourceforge.net/). The included script `build.sh` 
+will help you with this. It is located at `/root/build.sh` inside the 
+development container image.
 
-The build script will put the tarballs into the directory /tarballs, so you
-need to create a local dir and map it to the container with the -v option:
+The `build.sh` script will put downloaded tarballs into the directory 
+`/tarballs` and it may be a good idea to persist these in a dedicated volume.
 
-sudo docker run  -v ${PWD}/tarballs:/tarballs -t -i ovt-devel /root/build.sh
+```console
+$ docker volume create --name ovtdev-cache
+$ docker run -dit --name open-vm-tools-devel -v ovtdev-cache:/tarballs tinycorelinux:development
+$ docker attach open-vm-tools-devel
+container # cd /root && ./build.sh
+$ docker commit open-vm-tools-devel tinycorelinux:ovt-devel
+```
