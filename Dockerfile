@@ -11,7 +11,7 @@ RUN cd /tmp && for dep in $(cat /root/deps.list); do \
         unsquashfs -f -d / /tmp/$dep && \
         rm -f /tmp/$dep ;\
     done
-
+ENV LD_CONFIG_PATH /usr/local/lib
 RUN ldconfig
 
 COPY patches /root/patches/
